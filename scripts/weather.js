@@ -139,7 +139,7 @@ function memoize(fn, expiryTime = CACHELIFESPAN) {
             const result = await fn(...args);   //AL - I never learn!! need await for promises!!!
             cache[key] = { data: result, timestamp: now };  //storing weather data AND when it was fetched
             //console.log("Weather Data (before caching):", result);
-            //////saveCacheToLocalStorage(cache); // save to local cache. improved version baby!!
+            saveCacheToLocalStorage(cache); // save to local cache. improved version baby!!
             console.log("\nInvoking the function for the first time. Updating cache.");
             console.timeEnd(`time ${fn.name}:`);
             const end = performance.now();
