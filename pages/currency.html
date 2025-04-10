@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="..\styles\style.css">
-    <link rel="stylesheet" href="..\styles\eather.css">
+    <link rel="stylesheet" href="..\styles\currency.css">
     <script src="..\scripts\currency.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
             integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -57,13 +57,31 @@
                 </div>
 
                 <label for="amount">Amount:</label>
-                <input type="number" id="amount" name="amount" step="0.01" required>
+                <input type="number" id="amount" name="amount" step="0.01" max="1000000000000" required>
 
                 <button type="submit">Convert</button>
             
         </section>
         <section class="result-section">
             <div id="conversion-result"></div>
+        </section>
+
+        <section >
+            <div class="currency-guide">
+                <h3>Currency Guide</h3>
+                <ul>
+                    <li><strong>USD</strong>: United States Dollar</li>
+                    <li><strong>CAD</strong>: Canadian Dollar</li>
+                    <li><strong>PHP</strong>: Philippine Peso</li>
+                    <li><strong>AED</strong>: United Arab Emirates Dirham</li>
+                    <li><strong>EUR</strong>: Euro</li>
+                    <li><strong>GBP</strong>: British Pound Sterling</li>
+                    <li><strong>JPY</strong>: Japanese Yen</li>
+                    <li><strong>AUD</strong>: Australian Dollar</li>
+                    <li><strong>CNY</strong>: Chinese Yuan</li>
+                    <li><strong>INR</strong>: Indian Rupee</li>
+                </ul>
+            </div>
         </section>
     </main>
     <footer class="footer">

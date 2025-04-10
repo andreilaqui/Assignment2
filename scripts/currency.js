@@ -77,12 +77,15 @@ $(document).ready(function() {
             $('#conversion-result').text("Please enter a valid amount and select currencies.");
             return;
         }
-
         const convertedAmount = await memoConvertCurrency(fromCurrency, toCurrency, amount);
 
-        // display result
+        const formattedAmount = amount.toLocaleString();
+        const formattedConvertedAmount = Number(convertedAmount).toLocaleString();
+
         $('#conversion-result').html(`
-            <p>${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}</p>
+            <p>${formattedAmount} ${fromCurrency} = ${formattedConvertedAmount} ${toCurrency}</p>
         `);
+
+       
     });
 });
