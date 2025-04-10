@@ -139,7 +139,7 @@ function memoize(fn, expiryTime = CACHELIFESPAN) {
             const result = await fn(...args);   //AL - I never learn!! need await for promises!!!
             cache[key] = { data: result, timestamp: now };  //storing weather data AND when it was fetched
             //console.log("Weather Data (before caching):", result);
-            saveCacheToLocalStorage(cache); // save to local cache. improved version baby!!
+            //////saveCacheToLocalStorage(cache); // save to local cache. improved version baby!!
             console.log("\nInvoking the function for the first time. Updating cache.");
             console.timeEnd(`time ${fn.name}:`);
             const end = performance.now();
@@ -201,8 +201,7 @@ async function getWeather(latitude, longitude) {
     const params = new URLSearchParams({
         latitude: latitude,
         longitude: longitude,
-        hourly: "temperature_2m",  
-        daily: "sunrise,sunset,weathercode",
+        current: ["temperature_2m", "is_day", "apparent_temperature", "weather_code"],
         timezone: "auto"
     });
 
@@ -212,6 +211,7 @@ async function getWeather(latitude, longitude) {
             throw new Error("Failed to fetch weather data from API");
         }
         const data = await response.json();
+        console.log("Weather Data (after caching):", data);
         return data;
     } catch (error) {
         console.error("Error fetching weather data:", error);
@@ -240,29 +240,16 @@ $(document).ready(function() {
 
         if (weatherData) {
             // console.log(weatherData);
-            const weatherCode = weatherData.daily.weathercode[0];   // get the day's weather code
+            
+            const currentTemperature = weatherData.current.temperature_2m; // get current temperature
+            const feelsLike = weatherData.current.apparent_temperature; // get feels like temperature
+            const weatherCode = weatherData.current.weather_code;   // get current weather code
             const weatherInfo = weatherCodeMap[weatherCode];        // get weather info from the map using weather code
             
-            const currentHour = new Date().getHours();              // get current hour    
-            const currentTemperature = weatherData.hourly.temperature_2m[currentHour]; // get current temperature using the current hour
-            
-            const currentUTC = new Date().toISOString();
-            const cityTimezone = weatherData.timezone; 
-            const localTimeStr = getLocalTime(currentUTC, cityTimezone);    //formatted local time, maybe I should have a try catch here
-            const localTime = new Date(localTimeStr);                       //had lots of trouble comparing string and date, so I had to convert it to a date object
-            
-            if (!cityTimezone) {
-                $('#weather-result').text("Timezone data missing. Unable to determine local time.");
-                return;
-            }
+            const localTime = new Date(weatherData.current.time);
+            const localTimeStr = localTime.toLocaleString('en-US'); //formatted local time
+            const dayOrNight = (weatherData.current.is_day === 1) ? "day" : "night"; //get day or night for nice dynamic background color
 
-            const sunrise = new Date(weatherData.daily.sunrise[0]);    
-            const sunset = new Date(weatherData.daily.sunset[0]);
-            const isDaytime = localTime >= sunrise && localTime <= sunset;
-            const dayOrNight = isDaytime ? "day" : "night"; //get day or night for nice dynamic background color
-            
-
-            //<img src="${weatherInfo.image}" alt="${weatherInfo.description}" class='weather-icon'/>
             if (weatherInfo) {
                 $('#weather-result').html(`
                     <h2>Weather in ${city}</h2>
@@ -270,8 +257,9 @@ $(document).ready(function() {
                         <div class='weather-icon'>.</div>
                         <div><span class='temperature'>${currentTemperature}°C</span></div>
                         <span class='weather-desc'>${weatherInfo.description}</span><br/>
-                        </div>
-                    <span class='curr-time'>Local time: ${localTimeStr}</span>
+                    </div>
+                    <span class='feels-like' title='Perceived Temperature Based on Wind, Humidity, and More Factors'>Feels like ${feelsLike}°C</span><br/>
+                    <span class='curr-time'>As of local time: ${localTimeStr}</span>
                 `);
                 $('.weather-section').removeClass('day night').addClass(dayOrNight);
                 displayWeatherIcon(weatherCode); 
