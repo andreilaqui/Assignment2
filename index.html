@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/weather.css">
+    <script src="scripts/weather.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css"> <!-- weather icons -->
+
+    <title>Weather App</title>
+</head>
+<body>
+    
+    <header>
+        <h1>Weather App</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Weather App</a></li>
+            <li><a href="pages/currency.html">Currency Converter</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="select-weather">
+            <form id="weather-form">
+                <label for="city">Pick a city:</label>
+                <select id="city" name="city" required>
+                    <option value="Calgary">Calgary</option>
+                    <option value="Manila">Manila</option>
+                    <option value="San Francisco">San Francisco</option>
+                    <option value="Abu Dhabi">Abu Dhabi</option>
+                </select>   
+                <button type="submit">Get Weather</button>
+            </form>
+        </section>
+        <section class="weather-section">
+            <div id="weather-result"></div>
+        </section>
+    </main>
+    <footer class="footer">
+        <a href="https://www.linkedin.com/in/andrei-laqui-28a717311" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="Andrei Laqui at LinkedIn"></a>
+            <a href="https://www.instagram.com/dreilaqui" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Andrei Laqui in Instagram"></a>
+        <a href="https://www.facebook.com/dreilaqui" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Andrei Laqui in Facebook"></a>
+        <a href="https://flic.kr/ps/zbq8h" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/000000/flickr.png" alt="Andrei Laqui in Flickr"></a>
+        <a href="mailto:dreilaqui@yahoo.com">
+            <img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="Email Andrei Laqui">
+        </a>
+        <p>&copy; <span id="current-date"></span> Andrei Laqui. All rights reserved.</p>
+    </footer>
+   
+</body>
+</html>

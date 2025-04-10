@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f6feff;
+    color: #030303;
+    font-size: 16px;
+    
+}
+
+
+
+/*Header*/
+header {
+    background-color: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+/*Navigation*/
+nav {
+    background-color: #555555;
+    color: #fff;
+    padding: 15px 0;
+}
+
+nav ul {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: block;
+    margin: 0 15px;
+    width:200px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 1s;
+}
+
+nav ul li a:hover {
+    color: #1bfdee;
+}
+
+
+
+/*Main*/
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+section{
+    flex: 1 1 45%; /* for two columns */
+    margin: 1%;
+    padding: 1em;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* little shadow to make the panel pop */
+    
+}
+
+h2{
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+p{
+    margin: .3em;
+}
+
+
+
+li {
+    padding: .1em;
+}
+
+a.personal-email{
+    color: #0d00ff;
+    text-decoration: none;
+}
+
+button{
+    padding: .05rem 1rem;
+}
+
+
+.footer {
+    grid-area: footer;
+    background: #aaaaaa;
+    min-height: 70px;
+    text-align: center;
+    z-index: 1;
+    padding: 20px;
+}
+
+.footer a {
+    margin: 0 0px;
+}
+
+.footer img {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+/*smaller screens*/
+@media (max-width: 768px) {
+    
+    main{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    section{
+        width: 90%;
+    }
+
+    nav ul {
+        grid-template-columns: 1fr;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        width: 100%;
+    }
+}
